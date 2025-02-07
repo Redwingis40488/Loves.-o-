@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Bersama?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6f2;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        h1 {
+            color: #d63384;
+        }
+        .btn-container {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        .yes {
+            background-color: #ff4d6d;
+            color: white;
+        }
+        .no {
+            background-color: #cccccc;
+            color: black;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #d63384;
+            display: none;
+        }
+        #begadang {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Mau Valentine Bersama Aku? ❤️</h1>
+        <div class="btn-container">
+            <button class="btn yes" id="yesBtn" onclick="accept()">Ya!</button>
+            <button class="btn no" id="noBtn" onclick="decline()">Tidak</button>
+        </div>
+        <p id="message"></p>
+        <p id="begadang">Aku begadang buat ini web :)</p>
+    </div>
+
+    <script>
+        let declineCount = 0; // Menghitung jumlah klik "Tidak"
+        let messages = [
+            "Yakin nih? 😢 Tolong pikirkan lagi yaaa...",
+            "Plis jangan gitu 😭 Aku udah nungguin...",
+            "Kalau kamu nolak lagi, aku bakal sedih banget... 🥺",
+            "Tolongggg! Aku ga mau sendirian di Valentine 😭",
+            "Jangan bikin aku nangis dong... 😢😢😢",
+            "OKE, INI TERAKHIR! KLIK 'YA' SEKARANG ATAU AKU NGAMBEK!! 😡"
+        ];
+
+        function accept() {
+            document.getElementById("message").innerHTML = "Yay! Aku tunggu di hari Valentine ❤️";
+            document.getElementById("message").style.display = "block";
+
+            // Kirim pesan otomatis ke WhatsApp
+            let phoneNumber = "08973017117";
+            let message = encodeURIComponent("Aku setuju untuk Valentine bareng! ❤️\n(Aku begadang buat ini web :) )");
+            window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
+        }
+
+        function decline() {
+            let yesBtn = document.getElementById("yesBtn");
+            let message = document.getElementById("message");
+
+            // Tambah ukuran tombol "Ya"
+            let currentSize = parseInt(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (currentSize + 4) + "px";
+            yesBtn.style.padding = (currentSize + 6) + "px " + (currentSize + 12) + "px";
+
+            // Tampilkan pesan bujukan
+            if (declineCount < messages.length) {
+                message.innerHTML = messages[declineCount];
+                declineCount++;
+            } else {
+                message.innerHTML = "OKE! Aku nyerah... Tapi aku tetap sayang kamu 😭❤️";
+            }
+
+            message.style.display = "block";
+        }
+    </script>
+
+</body>
+  </html>
